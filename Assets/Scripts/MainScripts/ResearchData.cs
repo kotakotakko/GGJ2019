@@ -6,11 +6,11 @@ using UnityEngine;
 public class ResearchData : ScriptableObject
 {
 
-    [SerializeField] private GameObject prefab;//ゲームオブジェクトのプレハブ
-    [SerializeField] private string researchName;//object名
-    [SerializeField] private string researchInfo;//objectinfo
-    [SerializeField] private int researchCost;//研究コスト
-    [SerializeField] private ResearchType researchType;//研究種別
+    [SerializeField] private GameObject prefab = null;//ゲームオブジェクトのプレハブ
+    [SerializeField] private string researchName = null;//object名
+    [SerializeField] private string researchInfo = null;//objectinfo
+    [SerializeField] private int researchCost = 0;//研究コスト
+    [SerializeField] private ResearchType researchType = ResearchType.typeA;//研究種別
 
     public GameObject Prefab
     {

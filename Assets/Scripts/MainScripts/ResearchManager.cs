@@ -12,9 +12,9 @@ public enum ResearchType
 public class ResearchManager : MonoBehaviour
 {
 
-    [SerializeField] private int researchPoint;//開放させる覚えさせるためのポイント
-    private bool[] researchs;//開放しているかどうかのフラグ  
-    [SerializeField] private ResearchData[] researchDatas;//パラメーター
+    [SerializeField] private int researchPoint = 0;//開放させる覚えさせるためのポイント
+    private bool[] researchs = null;//開放しているかどうかのフラグ  
+    [SerializeField] private ResearchData[] researchDatas = null;//パラメーター
 
     public Text ResearchText;
 
