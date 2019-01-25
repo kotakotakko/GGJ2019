@@ -17,7 +17,7 @@ public class OptionUIManager : MonoBehaviour
         
     }
 
-
+    /*
     //他のスキルを取得した後の自身のボタンの処理
     public void CheckOnOff(ResearchType type)
     {
@@ -31,7 +31,7 @@ public class OptionUIManager : MonoBehaviour
         {
             ChangeButtonColor(new Color(1f, 1f, 1f, 1f));
         }
-    }
+    }*/
 
     //ボタンの色変更
     public void ChangeButtonColor(Color color)

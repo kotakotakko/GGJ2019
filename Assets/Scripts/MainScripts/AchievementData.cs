@@ -11,8 +11,8 @@ public class AchievementData : ScriptableObject
     [SerializeField] private int MissCount = 0;//間違えた回数
     [SerializeField] private int ContinuousCount = 0;//連続クリア
     [SerializeField] private int PerfectsCount = 0;//連続パーフェクト
-    [SerializeField] private AchievementConditionType releaseConditionType = AchievementConditionType.ClearStage;//アチーブメント
-    [SerializeField] private ResearchData ResearchData = null;
+    [SerializeField] private AchievementConditionType achievementConditionType = AchievementConditionType.ClearStage;//アチーブメント
+    [SerializeField] private ResearchData researchData = null;
 
     public int ThrowCount1 { get => ThrowCount; }
     public string ClearStage1 { get => ClearStage; }
@@ -20,6 +20,6 @@ public class AchievementData : ScriptableObject
     public int MissCount1 { get => MissCount; }
     public int ContinuousCount1 { get => ContinuousCount; }
     public int PerfectsCount1 { get => PerfectsCount; }
-    public AchievementConditionType ReleaseConditionType { get => releaseConditionType; }
-    public ResearchData ResearchData1 { get => ResearchData; }
+    public AchievementConditionType AchievementConditionType { get => achievementConditionType; }
+    public ResearchData ResearchData1 { get => researchData; }
 }
