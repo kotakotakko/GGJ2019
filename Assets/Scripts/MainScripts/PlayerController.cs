@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private KeyCode throwButton = KeyCode.Mouse0;
+    [SerializeField] private readonly KeyCode throwButton = KeyCode.Mouse0;
     [SerializeField] private bool isInput = false;
     [SerializeField] private bool isPowerUp = true;
 
-    [SerializeField] private float minPower = 1.0f;
-    [SerializeField] private float maxPower = 10.0f;
+    [SerializeField] private readonly float minPower = 1.0f;
+    [SerializeField] private readonly float maxPower = 10.0f;
 
     [SerializeField] private float nowPower = 0.0f;
-    [SerializeField] private float addPower = 1.0f;
+    [SerializeField] private readonly float addPower = 1.0f;
 
-    [SerializeField] private Vector2 serializePos;
-    [SerializeField] private Vector2 serializeToiletPos;
-    [SerializeField] private GameObject toiletObject;
-    [SerializeField] private Vector3 serializeThorw;
+    [SerializeField] private Vector2 serializePos = Vector2.zero;
+    [SerializeField] private Vector2 serializeToiletPos = Vector2.zero;
+    [SerializeField] private GameObject toiletObject = null;
+    [SerializeField] private Vector3 serializeThorw = Vector3.zero;
 
     void Start()
     {

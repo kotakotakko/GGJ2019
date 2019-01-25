@@ -26,6 +26,7 @@ public class ToiletController : MonoBehaviour
         }
     }
 
+    //判定
     private void Judge()
     {
         if (inToilet)
@@ -38,6 +39,7 @@ public class ToiletController : MonoBehaviour
         }
     }
 
+    //投げる処理
     public void Thorw(Vector2 thorwPoint,float nowPower)
     {
         rb.velocity = thorwPoint * nowPower;

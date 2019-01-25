@@ -7,22 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 {
-    [SerializeField] PlayerController playerController;
-    private bool isPlayerControll;
-    private bool isToiletStopCheck;
+    [SerializeField] PlayerController playerController = null;
+    private GameObject toiletObject = null;
+    private GameObject targetObject = null;
 
     // Start is called before the first frame update
     void Start()
     {
         playerController.SetIsInput(true);
-        isPlayerControll = true;
-        isToiletStopCheck = false;
+        toiletObject = GameObject.Find("Toilet");
+        targetObject = GameObject.Find("TargetPoint");
     }
 
-#if UNITY_EDITOR
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R)) { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
-    }
 #endif
+
+        Debug.Log(Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f);
+    }
 }
