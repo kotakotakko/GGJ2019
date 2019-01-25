@@ -3,45 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ResearchType
+public enum ToiletType
 {
     typeA,
     typeB
 }
 
-public class ResearchManager : MonoBehaviour
+public enum AchievementConditionType
+{
+    ThrowCount,
+    ClearStage,
+    StageClearCount,
+    MissCount,
+    ContinuousCount,
+    PerfectsCount
+}
+
+public class AchievementManager : MonoBehaviour
 {
 
     [SerializeField] private int researchPoint = 0;//開放させる覚えさせるためのポイント
-    private bool[] researchs = null;//開放しているかどうかのフラグ  
-    [SerializeField] private ResearchData[] researchDatas = null;//パラメーター
+    private bool[] achievements = null;//開放しているかどうかのフラグ  
+    [SerializeField] private AchievementData[] achievementDatas = null;//アチーブメントデータ
+    [SerializeField] private List<ResearchData> researchDatas = new List<ResearchData>();//便器データ
+    [SerializeField] private ResearchData defoResearchData = null;
 
     public Text ResearchText;
 
     private void Awake()
     {
         //スキル数分の配列を確保
-        researchs = new bool[researchDatas.Length];
+        achievements = new bool[achievementDatas.Length];
     }
 
-    public ResearchData GetResearchData(ResearchType researchType)
+    private void Start()
     {
-        return researchDatas[(int)researchType];
+        researchDatas.Add(defoResearchData);
+    }
+
+    public List<ResearchData> GetResearchDatas()
+    {
+        return researchDatas;
+    }
+
+    public ResearchData GetResearchData(ToiletType toiletType)
+    {
+        return researchDatas[(int)toiletType];
     }
 
     //スキルを覚える
-    public void SetResearch(ResearchType type, int point)
+    public void SetResearch(AchievementConditionType type, int point)
     {
-        researchs[(int)type] = true;
+        achievements[(int)type] = true;
         SetResearchPoint(point);
         SetText();
         CheckOnOff();
     }
 
     //スキルを覚えているかどうかのチェック
-    public bool IsResearch(ResearchType type)
+    public bool IsResearch(AchievementConditionType type)
     {
-        return researchs[(int)type];
+        return achievements[(int)type];
     }
 
     //スキルポイントを減らす
@@ -58,13 +80,13 @@ public class ResearchManager : MonoBehaviour
 
     //ここforで回す。
     //スキルを覚えられるかチェック
-    public bool Check(ResearchType type, int spendPoint = 0)
+    public bool Check(AchievementConditionType type, int spendPoint = 0)
     {
-        for (int i = 0; i < researchDatas.Length; i++)
+        for (int i = 0; i < achievementDatas.Length; i++)
         {
-            if (researchDatas[i].ResearchType == type)
+            if (achievementDatas[i].ReleaseConditionType == type)
             {
-                return researchDatas[i].ResearchCost <= spendPoint;
+                return true;
             }
         }
 
@@ -82,7 +104,7 @@ public class ResearchManager : MonoBehaviour
     }
 
     //スキルボタンを押した際に実行するメソッド
-    public void OnClick(ResearchType type)
+    public void OnClick(AchievementConditionType type)
     {
         //スキルを覚えていたら何もせずreturn
         if (IsResearch(type))
@@ -101,32 +123,5 @@ public class ResearchManager : MonoBehaviour
         }
     }
 
-    //他のスキルを取得した後の自身のボタンの処理
-    public void CheckOnOff(ResearchType type)
-    {
-        //スキルを覚えられるかチェック
-        if (!Check(type))
-        {
-            ChangeButtonColor(new Color(0.8f, 0.8f, 0.8f, 0.8f));
-            //スキルをまだ覚えていない
-        }
-        else if (!IsResearch(type))
-        {
-            ChangeButtonColor(new Color(1f, 1f, 1f, 1f));
-        }
-    }
 
-    //ボタンの色変更
-    public void ChangeButtonColor(Color color)
-    {
-        //ボタンコンポーネントを取得
-        Button button = gameObject.GetComponent<Button>();
-        //ボタンのカラー情報を取得(一時変数を作成し、色情報を変えてからそれをbutton.colorsに設定。じゃないとエラーになる)
-        ColorBlock cb = button.colors;
-        //取得済みのスキルボタンの色を変える。
-        cb.normalColor = color;
-        cb.pressedColor = color;
-        //ボタンのカラー情報を設定
-        button.colors = cb;
-    }
 }
