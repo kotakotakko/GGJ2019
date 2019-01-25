@@ -47,6 +47,17 @@ public class AchievementManager : MonoBehaviour
         return researchs[i];
     }
 
+    public bool CheckResearchData(ResearchData researchData)
+    {
+        for (int i = 0; i < researchDatas.Length; i++)
+        {
+            if (researchDatas[i] == researchData)
+            {
+                return researchs[i];
+            }
+        }
+        return false;
+    }
     //アチーブメントを達成にする
     public void SetAchievement(int i)
     {
@@ -65,7 +76,7 @@ public class AchievementManager : MonoBehaviour
         {
             if(researchDatas[j] == achievementDatas[i].ResearchData1)
             {
-                researchs[i] = true;
+                researchs[j] = true;
             }
         }
         
