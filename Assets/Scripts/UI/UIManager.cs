@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : SingletonMonoBehaviourFast<UIManager>
 {
@@ -22,10 +23,10 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager>
     }
 
 
-    SerializeField] DistanceUI distanceUI = null;//目標までの距離
+    [SerializeField] DistanceUI distanceUI = null;//目標までの距離
 
     public void SetDistancText(float value)
     {
-        distanceUI.GetComponent<Text>().text  "目標までの距離:" + value + "m";
+        distanceUI.SetDistancText(value);
     }
 }
