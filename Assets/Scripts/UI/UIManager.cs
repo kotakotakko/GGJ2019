@@ -20,4 +20,12 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager>
     {
         powerSliderUI.SetValue(value);
     }
+
+
+    SerializeField] DistanceUI distanceUI = null;//目標までの距離
+
+    public void SetDistancText(float value)
+    {
+        distanceUI.GetComponent<Text>().text  "目標までの距離:" + value + "m";
+    }
 }
