@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         nowPower = minPower;
+        UIManager.Instance.SetMinPower(minPower);
+        UIManager.Instance.SetMaxPower(maxPower);
     }
 
     void Update()
@@ -53,6 +55,8 @@ public class PlayerController : MonoBehaviour
             nowPower = maxPower;
             isPowerUp = false;
         }
+
+        UIManager.Instance.SetValue(nowPower);
     }
 
     private void Thorw()
