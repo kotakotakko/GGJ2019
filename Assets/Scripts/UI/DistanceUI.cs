@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class DistanceUI : MonoBehaviour
 {
 
-    [SerializeField] private GameObject scoreText = null;
+    [SerializeField] private Text scoreText = null;
 
     public void SetDistancText(float value)
     {
-        scoreText.GetComponent<Text>().text = "目標までの距離:" + value.ToString("f1") + "m";
+        scoreText.text = "目標までの距離:" + value.ToString("f1") + "m";
     }
 }
