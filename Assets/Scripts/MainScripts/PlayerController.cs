@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         Vector2 thorwPoint = Vector3.Normalize(worldPointPos - (Vector2)toiletObject.transform.position);
 
         toiletObject.GetComponent<ToiletController>().Thorw(thorwPoint, nowPower);
-
+        MainScriptManager.Instance.SetIsPlay(false);
         isInput = false;
     }
 

@@ -14,6 +14,9 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     private bool isPlay;
     private GameObject targetObject = null;
 
+    [SerializeField] private float timeLimit = 15.0f;
+    [SerializeField] private float nowTime = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +38,18 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 
         if (isPlay)
         {
-            UIManager.instance.SetDistanceText(Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f);
+            nowTime += Time.deltaTime;
+            if(nowTime > timeLimit)
+            {
+                isPlay = false;
+            }
+            UIManager.instance.SetTimeText(timeLimit - nowTime);
         }
+        UIManager.instance.SetDistanceText(Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f);
+    }
+
+    public void SetIsPlay(bool isPlay)
+    {
+        this.isPlay = isPlay;
     }
 }

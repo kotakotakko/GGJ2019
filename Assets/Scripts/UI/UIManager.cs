@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class UIManager : SingletonMonoBehaviourFast<UIManager>
 {
     [SerializeField] PowerSliderUI powerSliderUI = null;
+    //目標までの距離
+    [SerializeField] DistanceUI distanceUI = null;
+    //残り時間
+    [SerializeField] TimeTextUI timeTextUI = null;
 
     public void SetMinPower(float value)
     {
@@ -22,11 +26,13 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager>
         powerSliderUI.SetValue(value);
     }
 
-
-    [SerializeField] DistanceUI distanceUI = null;//目標までの距離
-
     public void SetDistanceText(float value)
     {
         distanceUI.SetDistanceText(value);
+    }
+
+    public void SetTimeText(float time)
+    {
+        timeTextUI.SetTimeText(time);
     }
 }
