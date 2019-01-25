@@ -25,8 +25,8 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] private int researchPoint = 0;//開放させる覚えさせるためのポイント
     private bool[] achievements = null;//開放しているかどうかのフラグ  
     [SerializeField] private AchievementData[] achievementDatas = null;//アチーブメントデータ
-    [SerializeField] private List<ResearchData> researchDatas = new List<ResearchData>();//便器データ
-    [SerializeField] private ResearchData defoResearchData = null;
+    private bool[] researchs = null;
+    [SerializeField] private ResearchData[] researchDatas = null;//便器データ
 
     public Text ResearchText;
 
@@ -34,27 +34,41 @@ public class AchievementManager : MonoBehaviour
     {
         //スキル数分の配列を確保
         achievements = new bool[achievementDatas.Length];
+        researchs = new bool[researchDatas.Length];
     }
 
-    private void Start()
-    {
-        researchDatas.Add(defoResearchData);
-    }
-
-    public List<ResearchData> GetResearchDatas()
+    public ResearchData[] GetResearchDatas()
     {
         return researchDatas;
     }
 
-    public ResearchData GetResearchData(ToiletType toiletType)
+    public bool GetResearchData(int i)
     {
-        return researchDatas[(int)toiletType];
+        return researchs[i];
     }
 
     //アチーブメントを達成にする
     public void SetAchievement(int i)
     {
         achievements[i] = true;
+    }
+
+    //researchを達成にする
+    public void SetResearch(int i)
+    {
+        if (achievementDatas[i].ResearchData1 == null)
+        {
+            return;
+        }
+
+        for (int j = 0; j < researchDatas.Length; j++)
+        {
+            if(researchDatas[j] == achievementDatas[i].ResearchData1)
+            {
+                researchs[i] = true;
+            }
+        }
+        
     }
 
     //アチーブメントが達成しているかをチェック
@@ -108,7 +122,7 @@ public class AchievementManager : MonoBehaviour
                 if (Check(achievementDatas[i]))
                 {
                     SetAchievement(i);
-                    researchDatas.Add(achievementDatas[i].ResearchData1);
+                    SetResearch(i);
                 }
             }
         }
