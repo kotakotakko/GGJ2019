@@ -25,8 +25,8 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager>
 
     [SerializeField] DistanceUI distanceUI = null;//目標までの距離
 
-    public void SetDistancText(float value)
+    public void SetDistanceText(float value)
     {
-        distanceUI.SetDistancText(value);
+        distanceUI.SetDistanceText(value);
     }
 }
