@@ -25,19 +25,4 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         if (Input.GetKeyDown(KeyCode.R)) { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
     }
 #endif
-
-    public void PlayerThrew()
-    {
-        if (isPlayerControll)
-        {
-            isPlayerControll = false;
-            isToiletStopCheck = true;
-
-        }
-    }
-
-    private void ToiletCheck()
-    {
-
-    }
 }

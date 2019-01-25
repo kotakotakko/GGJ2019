@@ -2,10 +2,10 @@
 using System.Collections;
 using UnityEngine.UI; // ←※これを忘れずに入れる
 
-public class Power : MonoBehaviour
+public class PowerSliderUI : MonoBehaviour
 {
 
-    Slider _slider;
+    [SerializeField] private Slider _slider;
 
     public void SetMinPower(float value)
     {
