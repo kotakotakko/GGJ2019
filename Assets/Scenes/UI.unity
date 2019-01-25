@@ -213,13 +213,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: Score922222222222
+  m_Text: "\u76EE\u6A19\u307E\u3067\uFF1Axxxxx\n"
 --- !u!222 &633988019
 CanvasRenderer:
   m_ObjectHideFlags: 0
