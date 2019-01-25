@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : SingletonMonoBehaviourFast<UIManager>
 {
-    [SerializeField] PowerSliderUI powerSliderUI;
+    [SerializeField] PowerSliderUI powerSliderUI = null;
 
     public void SetMinPower(float value)
     {

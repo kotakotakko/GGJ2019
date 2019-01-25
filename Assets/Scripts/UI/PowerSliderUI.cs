@@ -5,7 +5,7 @@ using UnityEngine.UI; // ←※これを忘れずに入れる
 public class PowerSliderUI : MonoBehaviour
 {
 
-    [SerializeField] private Slider _slider;
+    [SerializeField] private Slider _slider = null;
 
     public void SetMinPower(float value)
     {
