@@ -7,16 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 {
-    [SerializeField] PlayerController playerController = null;
+    [SerializeField] private GameObject playerControllerObject = null;
+    private PlayerController playerController = null;
+    [SerializeField] private ResearchData toiletData = null;
     private GameObject toiletObject = null;
+    private bool isPlay;
     private GameObject targetObject = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerController = playerControllerObject.GetComponent<PlayerController>();
         playerController.SetIsInput(true);
-        toiletObject = GameObject.Find("Toilet");
+        toiletObject = Instantiate(toiletData.Prefab, playerControllerObject.transform.position, Quaternion.identity);
+        toiletObject.transform.SetParent(playerControllerObject.transform);
+        toiletObject.transform.localPosition = Vector3.zero;
+        playerController.SetToiletObject(toiletObject);
         targetObject = GameObject.Find("TargetPoint");
+        isPlay = true;
     }
 
     private void Update()
@@ -25,6 +33,9 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         if (Input.GetKeyDown(KeyCode.R)) { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
 #endif
 
-        Debug.Log(Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f);
+        if (isPlay)
+        {
+            UIManager.instance.SetDistanceText(Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f);
+        }
     }
 }

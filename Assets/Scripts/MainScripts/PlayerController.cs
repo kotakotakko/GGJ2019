@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isPowerUp = true;
 
     [SerializeField] private readonly float minPower = 1.0f;
-    [SerializeField] private readonly float maxPower = 10.0f;
+    [SerializeField] private readonly float maxPower = 5.0f;
 
     [SerializeField] private float nowPower = 0.0f;
-    [SerializeField] private readonly float addPower = 1.0f;
+    [SerializeField] private readonly float addPower = 5.0f;
 
     [SerializeField] private Vector2 serializePos = Vector2.zero;
     [SerializeField] private Vector2 serializeToiletPos = Vector2.zero;
@@ -79,5 +79,10 @@ public class PlayerController : MonoBehaviour
     public void SetIsInput(bool enable)
     {
         isInput = enable;
+    }
+
+    public void SetToiletObject(GameObject gameObject)
+    {
+        toiletObject = gameObject;
     }
 }
