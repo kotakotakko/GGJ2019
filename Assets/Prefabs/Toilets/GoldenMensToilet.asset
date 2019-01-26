@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11749d2dcdb96a4ea165d85f21b339b, type: 3}
-  m_Name: AchievementData
+  m_Script: {fileID: 11500000, guid: 95c31e4bf4fbe514fab9444cac52b258, type: 3}
+  m_Name: GoldenMensToilet
   m_EditorClassIdentifier: 
-  ThrowCount: 0
-  ClearStage: 
-  StageClearCount: 0
-  MissCount: 0
-  ContinuousCount: 0
-  PerfectsCount: 0
-  achievementConditionType: 1
-  researchData: {fileID: 0}
+  prefab: {fileID: 8186324957425343376, guid: 66b405676630f3241803bb4607ef3ce1, type: 3}
+  researchName: GoldenMensToilet
+  researchInfo: GoldenMensToilet

@@ -11,6 +11,7 @@ public enum ToiletType
 
 public enum AchievementConditionType
 {
+    GamePlay,
     ThrowCount,
     ClearStage,
     StageClearCount,
@@ -97,6 +98,8 @@ public class AchievementManager : MonoBehaviour
     {
         switch (achievementData.AchievementConditionType)
         {
+            case AchievementConditionType.GamePlay:
+                return true;
             case AchievementConditionType.ClearStage:
                 if (true)
                 {
@@ -133,7 +136,7 @@ public class AchievementManager : MonoBehaviour
     }
 
     //スキルボタンを押した際に実行するメソッド
-    public void OnClick()
+    public void OnCheck()
     {
         for (int i = 0; i < achievements.Length; i++)
         {

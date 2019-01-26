@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95c31e4bf4fbe514fab9444cac52b258, type: 3}
-  m_Name: ResearchData
+  m_Name: GoldenWesternStyleToilet
   m_EditorClassIdentifier: 
-  prefab: {fileID: 385824784230762597, guid: f63cfef103b90b24493be517d8cdaa40, type: 3}
-  researchName: Toilet
-  researchInfo: toilet
-  researchCost: 100
-  researchType: 0
+  prefab: {fileID: 5779978690412149551, guid: ce2e086e26f678f41a90da6ba4f8c822, type: 3}
+  researchName: GoldenWesternStyleToilet
+  researchInfo: GoldenWesternStyleToilet

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ToiletSelect : MonoBehaviour
 {
-    [SerializeField] private Vector2 startSetPos = Vector2.zero;
-    [SerializeField] private Vector2 slideSetPos = Vector2.zero;
-    [SerializeField] private Vector2 nowPos = Vector2.zero;
+    [SerializeField] GameObject[] lockImage = new GameObject[4]; 
 
-    public void GenerateButton()
+    public void UnLock(int imageId)
     {
-
+        Debug.Log("unlock");
+        lockImage[imageId].SetActive(false);
     }
 }

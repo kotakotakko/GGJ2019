@@ -6,6 +6,7 @@ public class ToiletController : MonoBehaviour
 {
     private bool isCheck;
     private bool inToilet;
+    [SerializeField] private GameObject dustObject;
     Rigidbody2D rb;
 
     private void Start()
@@ -44,6 +45,16 @@ public class ToiletController : MonoBehaviour
     {
         rb.velocity = thorwPoint * nowPower;
         isCheck = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isCheck)
+        {
+            GameObject obj = Instantiate(dustObject, transform.position, dustObject.transform.rotation);
+            obj.SetActive(true);
+            Destroy(obj, 0.7f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

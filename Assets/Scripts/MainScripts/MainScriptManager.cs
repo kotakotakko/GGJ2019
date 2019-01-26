@@ -12,6 +12,8 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     private PlayerController playerController = null;
     [SerializeField] private ResearchData toiletData = null;
 
+    [SerializeField] private GameObject toiletSelectCanvas;
+
     private AchievementManager achievementManager = null;
     private ResearchData[] researchData;
     private GameObject toiletObject = null;
@@ -26,12 +28,15 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     {
         achievementManager = this.gameObject.GetComponent<AchievementManager>();
         researchData = achievementManager.GetResearchDatas();
+        achievementManager.OnCheck();
         playerController = playerControllerObject.GetComponent<PlayerController>();
         playerController.enabled = false;
 
-        if(researchData.Length == 1)
+        toiletSelectCanvas.SetActive(true);
+        ToiletSelect toiletSelect = toiletSelectCanvas.GetComponent<ToiletSelect>();
+        for(var i = 0;i < researchData.Length; i++)
         {
-            SelectToilet(DEFAULT_TOILET);
+            if (achievementManager.GetResearchData(i)) { toiletSelect.UnLock(i); }
         }
     }
 
@@ -44,11 +49,14 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         if (isPlay)
         {
             nowTime += Time.deltaTime;
-            if(nowTime > timeLimit)
+            if (nowTime > timeLimit)
             {
                 isPlay = false;
             }
             UIManager.instance.SetTimeText(timeLimit - nowTime);
+        }
+        if (toiletObject)
+        {
             UIManager.instance.SetDistanceText(Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f);
         }
     }
@@ -68,6 +76,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         toiletObject.transform.localPosition = Vector3.zero;
         playerController.SetToiletObject(toiletObject);
         targetObject = GameObject.Find("TargetPoint");
+        toiletSelectCanvas.SetActive(false);
         isPlay = true;
     }
 }
