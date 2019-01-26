@@ -13,6 +13,7 @@ public class AchievementData : ScriptableObject
     [SerializeField] private int PerfectsCount = 0;//連続パーフェクト
     [SerializeField] private AchievementConditionType achievementConditionType = AchievementConditionType.ClearStage;//アチーブメント
     [SerializeField] private ResearchData researchData = null;
+    [SerializeField] private string info;
 
     public int ThrowCount1 { get => ThrowCount; }
     public string ClearStage1 { get => ClearStage; }
@@ -22,4 +23,5 @@ public class AchievementData : ScriptableObject
     public int PerfectsCount1 { get => PerfectsCount; }
     public AchievementConditionType AchievementConditionType { get => achievementConditionType; }
     public ResearchData ResearchData1 { get => researchData; }
+    public string Info { get => info;}
 }

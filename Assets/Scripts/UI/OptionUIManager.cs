@@ -5,6 +5,63 @@ using UnityEngine.UI;
 
 public class OptionUIManager : MonoBehaviour
 {
+    [SerializeField] private Text playTime = null;
+    [SerializeField] private Text throwCount = null;
+    [SerializeField] private Text totalCarry = null;
+    [SerializeField] private Text clearCount = null;
+    [SerializeField] private Text perfectCount = null;
+    [SerializeField] private Text ContinuousCount = null;
+
+    [SerializeField] private Button japanBottan;
+    [SerializeField] private Button englishBottan;
+
+    [SerializeField] private GameObject achievementDisplayFrame;//prefab
+    [SerializeField] private GameObject parentAchievementDisplayFrame;//アチーブメント表示の親
+    [SerializeField] private AchievementManager achievementManager;
+
+    public void SetPlaytime(string text)
+    {
+        playTime.text = text;
+    }
+    public void SetThrowCount(string text)
+    {
+        throwCount.text = text;
+    }
+    public void SetTotalCarry(string text)
+    {
+        totalCarry.text = text;
+    }
+    public void SetClearCount(string text)
+    {
+        clearCount.text = text;
+    }
+    public void SetperfectCount(string text)
+    {
+        perfectCount.text = text;
+    }
+    public void SetPlaytime(int num)
+    {
+        playTime.text = num.ToString();
+    }
+    public void SetThrowCount(int num)
+    {
+        throwCount.text = num.ToString();
+    }
+    public void SetTotalCarry(int num)
+    {
+        totalCarry.text = num.ToString();
+    }
+    public void SetClearCount(int num)
+    {
+        clearCount.text = num.ToString();
+    }
+    public void SetperfectCount(int num)
+    {
+        perfectCount.text = num.ToString();
+    }
+
+    private GameObject[] achievementDisplayFrames;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +89,30 @@ public class OptionUIManager : MonoBehaviour
             ChangeButtonColor(new Color(1f, 1f, 1f, 1f));
         }
     }*/
+
+    public void CreateViewAchievementList()
+    {
+        AchievementData[] achievementDatas = achievementManager.GetAchievementDatas();
+        bool[] achievements = achievementManager.GetAchievements();
+
+        for (int i = 0; i < achievementDatas.Length; i++)
+        {
+            GameObject frameObject = Instantiate(achievementDisplayFrame) as GameObject;
+            achievementDisplayFrames[i] = frameObject;
+
+            frameObject.transform.parent = parentAchievementDisplayFrame.transform;
+
+            frameObject.transform.Find("Text").gameObject.GetComponent<Text>().text = achievementDatas[i].Info;
+        }
+    }
+
+    public void DestroyViewAchievementList()
+    {
+        for (int i = 0; i < achievementDisplayFrames.Length; i++)
+        {
+            Destroy(achievementDisplayFrames[i]);
+        }
+    }
 
     //ボタンの色変更
     public void ChangeButtonColor(Color color)

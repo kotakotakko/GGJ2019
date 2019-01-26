@@ -47,6 +47,16 @@ public class AchievementManager : MonoBehaviour
         return researchs[i];
     }
 
+    public AchievementData[] GetAchievementDatas()
+    {
+        return achievementDatas;
+    }
+
+    public bool[] GetAchievements()
+    {
+        return achievements;
+    }
+
     public bool CheckResearchData(ResearchData researchData)
     {
         for (int i = 0; i < researchDatas.Length; i++)
