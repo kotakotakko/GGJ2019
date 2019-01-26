@@ -22,24 +22,14 @@ public class ToiletController : MonoBehaviour
         if (isCheck && rb.IsSleeping())
         {
             isCheck = false;
-            Judge();
-            Debug.Log("End");
-
+            StartCoroutine(GoJudge());
         }
     }
 
-    //判定
-    private void Judge()
+    public IEnumerator GoJudge()
     {
-        if (inToilet)
-        {
-            Debug.Log("勝ち");
-        }
-        else
-        {
-            Debug.Log("負け");
-        }
-        ResultController.Instance.EnableResult(true, 0.0f, 0.0f, 0.0f);
+        yield return new WaitForSeconds(1.0f);
+        MainScriptManager.Instance.Judge(inToilet, this.transform.rotation);
     }
 
     //投げる処理
