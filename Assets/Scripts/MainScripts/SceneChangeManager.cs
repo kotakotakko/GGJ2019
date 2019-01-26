@@ -29,4 +29,9 @@ public class SceneChangeManager : SingletonMonoBehaviourFast<SceneChangeManager>
         Debug.Log("load");
         SceneManager.LoadScene(((SceneName)sceneNum).ToString());
     }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

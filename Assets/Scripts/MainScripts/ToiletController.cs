@@ -24,6 +24,7 @@ public class ToiletController : MonoBehaviour
             isCheck = false;
             Judge();
             Debug.Log("End");
+
         }
     }
 
@@ -38,20 +39,23 @@ public class ToiletController : MonoBehaviour
         {
             Debug.Log("負け");
         }
+        ResultController.Instance.EnableResult(true, 0.0f, 0.0f, 0.0f);
     }
 
     //投げる処理
     public void Thorw(Vector2 thorwPoint,float nowPower)
     {
         rb.velocity = thorwPoint * nowPower;
+        rb.angularVelocity = thorwPoint.magnitude * nowPower * 300.0f;
         isCheck = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.tag == "Ground" && isCheck)
         {
-            GameObject obj = Instantiate(dustObject, transform.position, dustObject.transform.rotation);
+            GameObject obj = Instantiate(dustObject, transform.position, Quaternion.Euler(90.0f,0.0f,0.0f));
             obj.SetActive(true);
             Destroy(obj, 0.7f);
         }
