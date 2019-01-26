@@ -85,7 +85,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         Debug.Log(rotateScore);
         int totalScore = score + distanceScore + timeScore + rotateScore; 
 
-        if(score + rotateScore == DEFAULT_DISTANCE_SCORE + DEFAULT_ROTATE_SCORE)
+        if((score + rotateScore) == (DEFAULT_DISTANCE_SCORE + DEFAULT_ROTATE_SCORE))
         {
             parfectEffect.SetActive(true);
         }
