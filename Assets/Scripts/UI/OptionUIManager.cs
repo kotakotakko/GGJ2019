@@ -100,9 +100,16 @@ public class OptionUIManager : MonoBehaviour
             GameObject frameObject = Instantiate(achievementDisplayFrame) as GameObject;
             achievementDisplayFrames[i] = frameObject;
 
+            string tmpText = "?????";
+
             frameObject.transform.parent = parentAchievementDisplayFrame.transform;
 
-            frameObject.transform.Find("Text").gameObject.GetComponent<Text>().text = achievementDatas[i].Info;
+            if (achievements[i])
+            {
+                tmpText = achievementDatas[i].Info;
+            }
+
+            frameObject.transform.Find("Text").gameObject.GetComponent<Text>().text = tmpText;
         }
     }
 
