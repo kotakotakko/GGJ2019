@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance.SetValue(nowPower);
     }
 
-    private void Thorw()
+    public void Thorw()
     {
         //マウス位置座標をVector3で取得
         Vector2 pos = Input.mousePosition;
