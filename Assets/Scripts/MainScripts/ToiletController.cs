@@ -30,6 +30,7 @@ public class ToiletController : MonoBehaviour
     public IEnumerator GoJudge()
     {
         yield return new WaitForSeconds(1.0f);
+        PlayerStatus.AddTotalCarry(Vector3.Distance(transform.parent.position,transform.position) * 10.0f);
         MainScriptManager.Instance.Judge(inToilet, this.transform.rotation);
     }
 

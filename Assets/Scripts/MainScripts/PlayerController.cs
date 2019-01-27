@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.enabled = true;
         thorwSound.PlayOneShot(thorwSound.clip);
+        PlayerStatus.AddThorwCount();
         //マウス位置座標をVector3で取得
         Vector2 pos = Input.mousePosition;
 
