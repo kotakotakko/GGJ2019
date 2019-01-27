@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 serializeThorw = Vector3.zero;
 
     [SerializeField] AudioSource thorwSound = null;
-
+    [SerializeField] Animator anim = null;
     void Start()
     {
         thorwSound = this.gameObject.GetComponent<AudioSource>();
@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     public void Thorw()
     {
+        anim.enabled = true;
         thorwSound.PlayOneShot(thorwSound.clip);
         //マウス位置座標をVector3で取得
         Vector2 pos = Input.mousePosition;

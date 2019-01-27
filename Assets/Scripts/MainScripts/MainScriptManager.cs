@@ -32,6 +32,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     [SerializeField] private float nearDistance = 0.0f;
     [SerializeField] private float limitDistance = 0.0f;
 
+    private AudioSource audioSource;
     private float startTime = 0.0f;
     private bool isOption = false;
 
@@ -39,6 +40,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = this.gameObject.GetComponent<AudioSource>();
         startTime = Time.time;
         achievementManager = this.gameObject.GetComponent<AchievementManager>();
         researchData = achievementManager.GetResearchDatas();
@@ -96,6 +98,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         if (inToilet)
         {
             score = DEFAULT_DISTANCE_SCORE;
+            audioSource.PlayOneShot(audioSource.clip);
             PlayerStatus.AddClearCount();
         }
         else
@@ -151,7 +154,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         playerController.SetIsInput(true);
         toiletObject = Instantiate(toiletData.Prefab, playerControllerObject.transform.position, Quaternion.identity);
         toiletObject.transform.SetParent(playerControllerObject.transform);
-        toiletObject.transform.localPosition = Vector3.zero;
+        toiletObject.transform.localPosition = new Vector3(0.0f,0.5f,0.0f);
         playerController.SetToiletObject(toiletObject);
         targetObject = GameObject.Find("TargetPoint");
         toiletSelectCanvas.SetActive(false);
