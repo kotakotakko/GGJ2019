@@ -77,6 +77,8 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
             nowTime += Time.deltaTime;
             if (nowTime > timeLimit)
             {
+                nowTime = timeLimit;
+                playerController.Thorw();
                 isPlay = false;
             }
             UIManager.instance.SetTimeText(TimeLag());

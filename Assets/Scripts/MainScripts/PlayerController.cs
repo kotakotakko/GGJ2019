@@ -19,8 +19,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject toiletObject = null;
     [SerializeField] private Vector3 serializeThorw = Vector3.zero;
 
+    [SerializeField] AudioSource thorwSound = null;
+
     void Start()
     {
+        thorwSound = this.gameObject.GetComponent<AudioSource>();
         nowPower = minPower;
         UIManager.Instance.SetMinPower(minPower);
         UIManager.Instance.SetMaxPower(maxPower);
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     public void Thorw()
     {
+        thorwSound.PlayOneShot(thorwSound.clip);
         //マウス位置座標をVector3で取得
         Vector2 pos = Input.mousePosition;
 

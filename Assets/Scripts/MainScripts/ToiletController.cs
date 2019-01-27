@@ -8,12 +8,13 @@ public class ToiletController : MonoBehaviour
     private bool inToilet;
     [SerializeField] private GameObject dustObject;
     Rigidbody2D rb;
-
+    private AudioSource audioSource;
     private void Start()
     {
         inToilet = false;
         isCheck = false;
         rb = this.gameObject.GetComponent<Rigidbody2D>();
+        audioSource = Camera.main.gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,9 +43,10 @@ public class ToiletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        
         if (collision.gameObject.tag == "Ground" && isCheck)
         {
+            audioSource.PlayOneShot(audioSource.clip);
             GameObject obj = Instantiate(dustObject, transform.position, Quaternion.Euler(90.0f,0.0f,0.0f));
             obj.SetActive(true);
             Destroy(obj, 0.7f);
