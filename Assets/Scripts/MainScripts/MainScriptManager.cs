@@ -73,7 +73,17 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     public void Judge(bool inToilet, Quaternion toiletRotation)
     {
         //目標内なら5000点
-        int score = inToilet ? DEFAULT_DISTANCE_SCORE : 0;
+        int score = 0;
+        if (inToilet)
+        {
+            score = DEFAULT_DISTANCE_SCORE;
+            PlayerStatus.AddClearCount();
+        }
+        else
+        {
+            score = 0;
+            PlayerStatus.AddMissCount();
+        }
         Debug.Log(score);
         int distanceScore = (int)(Mathf.InverseLerp(limitDistance, nearDistance, TargetDistance()) * DEFAULT_DISTANCE_SCORE);
         Debug.Log(distanceScore);
@@ -88,6 +98,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         if((score + rotateScore) == (DEFAULT_DISTANCE_SCORE + DEFAULT_ROTATE_SCORE))
         {
             parfectEffect.SetActive(true);
+            PlayerStatus.AddPerfectsCount();
         }
 
         ResultController.Instance.EnableResult(true, 0.0f, 0.0f, 0.0f);

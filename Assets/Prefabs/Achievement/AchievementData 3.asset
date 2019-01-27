@@ -19,5 +19,5 @@ MonoBehaviour:
   ContinuousCount: 0
   PerfectsCount: 0
   achievementConditionType: 3
-  researchData: {fileID: 0}
+  researchData: {fileID: 11400000, guid: 159f8bf685caff943946c8cb502f56ca, type: 2}
   info: 

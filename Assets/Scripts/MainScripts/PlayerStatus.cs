@@ -6,11 +6,9 @@ public struct StageData
 {
     public string stageName;
     public string sceneName;        //シーン移行するやつ
+    public bool stageClear;
     public int score;               //スコア
-    public int clearCount;          //何回クリアしたか
-    public int missCount;           //何回失敗したか(failedが好ましい気がする)
     public int continuousCount;     //連続クリア
-    public int perfectsCount;       //連続パーフェクト
 }
 
 public class PlayerStatus : MonoBehaviour
@@ -18,7 +16,10 @@ public class PlayerStatus : MonoBehaviour
 
     public static StageData[] stageDatas = new StageData[5];
     public static float playTime = 0.0f;
-
+    public static int missCount;           //何回失敗したか(failedが好ましい気がする)
+    public static int clearCount;          //何回クリアしたか
+    public static int perfectsCount;
+    public static int thorwCount;
     private void Awake()
     {
         Init();
@@ -30,12 +31,13 @@ public class PlayerStatus : MonoBehaviour
         {
             stageDatas[i].stageName = "";
             stageDatas[i].sceneName = "";
-            stageDatas[i].clearCount = 0;
-            stageDatas[i].missCount = 0;
             stageDatas[i].continuousCount = 0;
-            stageDatas[i].perfectsCount = 0;
         }
+        perfectsCount = 0;       //連続パーフェクト
+        clearCount = 0;
+        missCount = 0;
         playTime = 0.0f;
+        thorwCount = 0;
     }
 
     public static StageData GetStageData(int stageId)
@@ -43,9 +45,21 @@ public class PlayerStatus : MonoBehaviour
         return stageDatas[stageId];
     }
 
-    public static void StageClear(int stageId)
+    public static void SetStageClear(int stageId)
     {
-        stageDatas[stageId].clearCount += 1;
+        stageDatas[stageId].stageClear = true;
+    }
+
+    public static bool GetStageClear(string stageName)
+    {
+        for (var i = 0; i < stageDatas.Length; i++)
+        {
+            if (stageDatas[i].stageName == stageName)
+            {
+                return stageDatas[i].stageClear;
+            }
+        }
+        return false;
     }
 
     public static float GetPlayTime()
@@ -58,36 +72,56 @@ public class PlayerStatus : MonoBehaviour
         playTime = value;
     }
 
-    public static float GetClearCount(int stageId)
+    public static float GetClearCount()
     {
-        return stageDatas[stageId].clearCount;
+        return clearCount;
     }
 
-    public static void AddClearCount(int stageId)
+    public static void AddClearCount()
     {
-        stageDatas[stageId].clearCount += 1;
+        clearCount += 1;
     }
 
-    public static float GetMissCount(int stageId)
+    public static float GetMissCount()
     {
-        return stageDatas[stageId].missCount;
+        return missCount;
     }
 
-    public static void AddMissCount(int stageId)
+    public static void AddMissCount()
     {
-        stageDatas[stageId].missCount += 1;
+        missCount += 1;
     }
 
-    public static float GetMissScore(int stageId)
+    public static float GetScore(int stageId)
     {
-        return stageDatas[stageId].missCount;
+        return stageDatas[stageId].score;
     }
 
-    public static void SetMissScore(int stageId, int value)
+    public static void SetScore(int stageId, int value)
     {
         if (stageDatas[stageId].score > value)
         {
             stageDatas[stageId].score = value;
         }
+    }
+
+    public static void AddPerfectsCount()
+    {
+        perfectsCount += 1;
+    }
+
+    public static int GetPerfectsCount()
+    {
+        return perfectsCount;
+    }
+
+    public static void AddThorwCount()
+    {
+        thorwCount += 1;
+    }
+
+    public static int GetThorwCount()
+    {
+        return thorwCount;
     }
 }

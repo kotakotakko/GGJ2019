@@ -101,35 +101,20 @@ public class AchievementManager : MonoBehaviour
             case AchievementConditionType.GamePlay:
                 return true;
             case AchievementConditionType.ClearStage:
-                if (true)
-                {
-                    return true;
-                }
+                return PlayerStatus.GetStageClear(achievementData.ClearStage1);
             case AchievementConditionType.ContinuousCount:
                 if (true)
                 {
                     return true;
                 }
             case AchievementConditionType.MissCount:
-                if (true)
-                {
-                    return true;
-                }
+                return achievementData.MissCount1 >= PlayerStatus.GetMissCount();
             case AchievementConditionType.PerfectsCount:
-                if (true)
-                {
-                    return true;
-                }
+                return achievementData.PerfectsCount1 >= PlayerStatus.GetPerfectsCount();
             case AchievementConditionType.StageClearCount:
-                if (true)
-                {
-                    return true;
-                }
+                return achievementData.StageClearCount1 >= PlayerStatus.GetClearCount();
             case AchievementConditionType.ThrowCount:
-                if (true)
-                {
-                    return true;
-                }
+                return achievementData.ThrowCount1 >= PlayerStatus.GetThorwCount();
         }
 
         return false;
