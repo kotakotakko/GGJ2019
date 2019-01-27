@@ -22,16 +22,11 @@ public class PlayerStatus : MonoBehaviour
     public static int thorwCount;
     public static float totalCarry;
 
-    private void Awake()
-    {
-        Init();
-    }
-
-    private void Init()
+    public static void Init()
     {
         for(var i = 0;i< stageDatas.Length; i++)
         {
-            stageDatas[i].stageName = "";
+            stageDatas[i].stageName = (i + 1).ToString();
             stageDatas[i].sceneName = "";
             stageDatas[i].continuousCount = 0;
         }

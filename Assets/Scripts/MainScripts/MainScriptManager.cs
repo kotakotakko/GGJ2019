@@ -19,7 +19,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     [SerializeField] private GameObject toiletSelectCanvas = null;
 
     private AchievementManager achievementManager = null;
-    private ResearchData[] researchData;
+    private AchievementData[] achievementData;
     private GameObject toiletObject = null;
     private bool isPlay = false;
     private GameObject targetObject = null;
@@ -43,16 +43,24 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         audioSource = this.gameObject.GetComponent<AudioSource>();
         startTime = Time.time;
         achievementManager = this.gameObject.GetComponent<AchievementManager>();
-        researchData = achievementManager.GetResearchDatas();
+        achievementData = achievementManager.GetAchievementDatas();
         achievementManager.OnCheck();
         playerController = playerControllerObject.GetComponent<PlayerController>();
         playerController.enabled = false;
 
         toiletSelectCanvas.SetActive(true);
         ToiletSelect toiletSelect = toiletSelectCanvas.GetComponent<ToiletSelect>();
-        for (var i = 0; i < researchData.Length; i++)
+        int unLockNum = 0;
+        for (var i = 0; i < achievementData.Length; i++)
         {
-            if (achievementManager.GetResearchData(i)) { toiletSelect.UnLock(i); }
+            if (achievementData[i].ResearchData1)
+            {
+                if (achievementManager.GetAchievements()[i])
+                {
+                    toiletSelect.UnLock(unLockNum);
+                    unLockNum += 1;
+                }
+            }
         }
     }
 

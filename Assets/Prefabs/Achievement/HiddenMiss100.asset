@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b11749d2dcdb96a4ea165d85f21b339b, type: 3}
-  m_Name: AchievementData 2
+  m_Name: HiddenMiss100
   m_EditorClassIdentifier: 
   ThrowCount: 0
   ClearStage: 
   StageClearCount: 0
-  MissCount: 0
+  MissCount: 100
   ContinuousCount: 0
   PerfectsCount: 0
-  achievementConditionType: 2
-  researchData: {fileID: 11400000, guid: 687b9246f1718c64084c4d403a39c396, type: 2}
-  info: hogehoge
+  achievementConditionType: 4
+  researchData: {fileID: 11400000, guid: 159f8bf685caff943946c8cb502f56ca, type: 2}
+  info: "\u96A0\u3057\u5B9F\u7E3E:100\u56DE\u9023\u7D9A\u3067\u5916\u3059"

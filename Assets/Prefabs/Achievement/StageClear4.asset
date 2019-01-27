@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b11749d2dcdb96a4ea165d85f21b339b, type: 3}
-  m_Name: AchievementData 3
+  m_Name: StageClear4
   m_EditorClassIdentifier: 
   ThrowCount: 0
-  ClearStage: 
+  ClearStage: 4
   StageClearCount: 0
   MissCount: 0
   ContinuousCount: 0
   PerfectsCount: 0
-  achievementConditionType: 3
-  researchData: {fileID: 11400000, guid: 159f8bf685caff943946c8cb502f56ca, type: 2}
-  info: hogehoge
+  achievementConditionType: 2
+  researchData: {fileID: 0}
+  info: "\u30B9\u30C6\u30FC\u30B84\u3092\u30AF\u30EA\u30A2"
