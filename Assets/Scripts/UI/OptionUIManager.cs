@@ -62,33 +62,15 @@ public class OptionUIManager : MonoBehaviour
 
     private GameObject[] achievementDisplayFrames;
 
-    // Start is called before the first frame update
-    void Start()
+    public void OptionOpen()
     {
-        
+        this.transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OptionClose()
     {
-        
+        this.transform.GetChild(0).gameObject.SetActive(false);
     }
-
-    /*
-    //他のスキルを取得した後の自身のボタンの処理
-    public void CheckOnOff(ResearchType type)
-    {
-        //スキルを覚えられるかチェック
-        if (!Check(type))
-        {
-            ChangeButtonColor(new Color(0.8f, 0.8f, 0.8f, 0.8f));
-            //スキルをまだ覚えていない
-        }
-        else if (!IsResearch(type))
-        {
-            ChangeButtonColor(new Color(1f, 1f, 1f, 1f));
-        }
-    }*/
 
     public void CreateViewAchievementList()
     {

@@ -6,6 +6,7 @@ public struct StageData
 {
     public string stageName;
     public string sceneName;        //シーン移行するやつ
+    public int score;               //スコア
     public int clearCount;          //何回クリアしたか
     public int missCount;           //何回失敗したか(failedが好ましい気がする)
     public int continuousCount;     //連続クリア
@@ -55,5 +56,38 @@ public class PlayerStatus : MonoBehaviour
     public static void SetPlayTime(float value)
     {
         playTime = value;
+    }
+
+    public static float GetClearCount(int stageId)
+    {
+        return stageDatas[stageId].clearCount;
+    }
+
+    public static void AddClearCount(int stageId)
+    {
+        stageDatas[stageId].clearCount += 1;
+    }
+
+    public static float GetMissCount(int stageId)
+    {
+        return stageDatas[stageId].missCount;
+    }
+
+    public static void AddMissCount(int stageId)
+    {
+        stageDatas[stageId].missCount += 1;
+    }
+
+    public static float GetMissScore(int stageId)
+    {
+        return stageDatas[stageId].missCount;
+    }
+
+    public static void SetMissScore(int stageId, int value)
+    {
+        if (stageDatas[stageId].score > value)
+        {
+            stageDatas[stageId].score = value;
+        }
     }
 }
