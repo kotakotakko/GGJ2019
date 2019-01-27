@@ -5717,7 +5717,7 @@ MonoBehaviour:
   totalCarry: {fileID: 1702773203}
   clearCount: {fileID: 1816458721}
   perfectCount: {fileID: 25447066}
-  continuousCount: {fileID: 0}
+  continuousCount: {fileID: 777596469}
   japanBottan: {fileID: 733658710}
   englishBottan: {fileID: 1556600711}
   achievementDisplayFrame: {fileID: 537224983012922577, guid: 12deeb81a2725a64fa6f99ceb9d35f00,

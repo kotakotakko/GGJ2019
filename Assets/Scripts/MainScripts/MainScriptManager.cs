@@ -144,7 +144,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 
     public void SelectToilet(int type)
     {
-        //        toiletData = achievementManager.GetResearchData((ToiletType)type);
+        toiletData = achievementManager.GetResearchDatas()[type];
         playerController.enabled = true;
         playerController.SetIsInput(true);
         toiletObject = Instantiate(toiletData.Prefab, playerControllerObject.transform.position, Quaternion.identity);
