@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionUIManager : MonoBehaviour
+public class OptionUIManager : SingletonMonoBehaviourFast<OptionUIManager>
 {
     [SerializeField] private Text playTime = null;
     [SerializeField] private Text throwCount = null;
     [SerializeField] private Text totalCarry = null;
     [SerializeField] private Text clearCount = null;
     [SerializeField] private Text perfectCount = null;
-    [SerializeField] private Text ContinuousCount = null;
+    [SerializeField] private Text continuousCount = null;
 
     [SerializeField] private Button japanBottan;
     [SerializeField] private Button englishBottan;
@@ -35,9 +35,13 @@ public class OptionUIManager : MonoBehaviour
     {
         clearCount.text = text;
     }
-    public void SetperfectCount(string text)
+    public void SetPerfectCount(string text)
     {
         perfectCount.text = text;
+    }
+    public void ContinuousCount(string text)
+    {
+        continuousCount.text = text;
     }
     public void SetPlaytime(int num)
     {
@@ -55,9 +59,13 @@ public class OptionUIManager : MonoBehaviour
     {
         clearCount.text = num.ToString();
     }
-    public void SetperfectCount(int num)
+    public void SetPerfectCount(int num)
     {
         perfectCount.text = num.ToString();
+    }
+    public void ContinuousCount(int text)
+    {
+        continuousCount.text = text.ToString();
     }
 
     private GameObject[] achievementDisplayFrames;
@@ -65,11 +73,19 @@ public class OptionUIManager : MonoBehaviour
     public void OptionOpen()
     {
         this.transform.GetChild(0).gameObject.SetActive(true);
+        SetPlaytime((int)PlayerStatus.GetPlayTime());
+        SetThrowCount(PlayerStatus.GetThorwCount());
+        SetTotalCarry((int)PlayerStatus.GetTotalCarry());
+        SetClearCount(PlayerStatus.GetClearCount());
+        SetPerfectCount(PlayerStatus.GetPerfectsCount());
+        ContinuousCount(0);
+        CreateViewAchievementList();
     }
 
     public void OptionClose()
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
+        DestroyViewAchievementList();
     }
 
     public void CreateViewAchievementList()
@@ -77,9 +93,11 @@ public class OptionUIManager : MonoBehaviour
         AchievementData[] achievementDatas = achievementManager.GetAchievementDatas();
         bool[] achievements = achievementManager.GetAchievements();
 
+        achievementDisplayFrames = new GameObject[achievementDatas.Length];
         for (int i = 0; i < achievementDatas.Length; i++)
         {
             GameObject frameObject = Instantiate(achievementDisplayFrame) as GameObject;
+            Debug.Log(frameObject);
             achievementDisplayFrames[i] = frameObject;
 
             string tmpText = "?????";

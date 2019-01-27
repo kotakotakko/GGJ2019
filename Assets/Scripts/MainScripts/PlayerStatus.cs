@@ -20,6 +20,8 @@ public class PlayerStatus : MonoBehaviour
     public static int clearCount;          //何回クリアしたか
     public static int perfectsCount;
     public static int thorwCount;
+    public static float totalCarry;
+
     private void Awake()
     {
         Init();
@@ -38,6 +40,7 @@ public class PlayerStatus : MonoBehaviour
         missCount = 0;
         playTime = 0.0f;
         thorwCount = 0;
+        totalCarry = 0.0f;
     }
 
     public static StageData GetStageData(int stageId)
@@ -72,7 +75,7 @@ public class PlayerStatus : MonoBehaviour
         playTime = value;
     }
 
-    public static float GetClearCount()
+    public static int GetClearCount()
     {
         return clearCount;
     }
@@ -82,7 +85,7 @@ public class PlayerStatus : MonoBehaviour
         clearCount += 1;
     }
 
-    public static float GetMissCount()
+    public static int GetMissCount()
     {
         return missCount;
     }
@@ -123,5 +126,25 @@ public class PlayerStatus : MonoBehaviour
     public static int GetThorwCount()
     {
         return thorwCount;
+    }
+
+    public static void AddPlayTime(float value)
+    {
+        playTime += value;
+    }
+
+    public static float GetPlayTIme()
+    {
+        return playTime;
+    }
+
+    public static void AddTotalCarry(float value)
+    {
+        totalCarry += value;
+    }
+
+    public static float GetTotalCarry()
+    {
+        return totalCarry;
     }
 }

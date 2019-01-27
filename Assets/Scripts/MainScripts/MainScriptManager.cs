@@ -16,12 +16,12 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     private PlayerController playerController = null;
     [SerializeField] private ResearchData toiletData = null;
 
-    [SerializeField] private GameObject toiletSelectCanvas;
+    [SerializeField] private GameObject toiletSelectCanvas = null;
 
     private AchievementManager achievementManager = null;
     private ResearchData[] researchData;
     private GameObject toiletObject = null;
-    private bool isPlay;
+    private bool isPlay = false;
     private GameObject targetObject = null;
 
     [SerializeField] private GameObject parfectEffect = null;
@@ -32,9 +32,14 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
     [SerializeField] private float nearDistance = 0.0f;
     [SerializeField] private float limitDistance = 0.0f;
 
+    private float startTime = 0.0f;
+    private bool isOption = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        startTime = Time.time;
         achievementManager = this.gameObject.GetComponent<AchievementManager>();
         researchData = achievementManager.GetResearchDatas();
         achievementManager.OnCheck();
@@ -43,7 +48,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 
         toiletSelectCanvas.SetActive(true);
         ToiletSelect toiletSelect = toiletSelectCanvas.GetComponent<ToiletSelect>();
-        for(var i = 0;i < researchData.Length; i++)
+        for (var i = 0; i < researchData.Length; i++)
         {
             if (achievementManager.GetResearchData(i)) { toiletSelect.UnLock(i); }
         }
@@ -54,7 +59,19 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R)) { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
 #endif
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isOption)
+            {
+                isOption = true;
+                OptionUIManager.instance.OptionOpen();
+            }
+            else
+            {
+                isOption = false;
+                OptionUIManager.instance.OptionClose();
+            }
+        }
         if (isPlay)
         {
             nowTime += Time.deltaTime;
@@ -91,11 +108,11 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         Debug.Log(timeScore);
         Debug.Log(18 - Mathf.RoundToInt(Quaternion.Angle(Quaternion.identity, toiletRotation) / 10.0f));
         Debug.Log(((18 - Mathf.RoundToInt(Quaternion.Angle(Quaternion.identity, toiletRotation) / 10.0f)) / 18.0f));
-        int rotateScore = (int)((18 - Mathf.RoundToInt(Quaternion.Angle(Quaternion.identity, toiletRotation)/10.0f)) / 18.0f * DEFAULT_ROTATE_SCORE);
+        int rotateScore = (int)((18 - Mathf.RoundToInt(Quaternion.Angle(Quaternion.identity, toiletRotation) / 10.0f)) / 18.0f * DEFAULT_ROTATE_SCORE);
         Debug.Log(rotateScore);
-        int totalScore = score + distanceScore + timeScore + rotateScore; 
+        int totalScore = score + distanceScore + timeScore + rotateScore;
 
-        if((score + rotateScore) == (DEFAULT_DISTANCE_SCORE + DEFAULT_ROTATE_SCORE))
+        if ((score + rotateScore) == (DEFAULT_DISTANCE_SCORE + DEFAULT_ROTATE_SCORE))
         {
             parfectEffect.SetActive(true);
             PlayerStatus.AddPerfectsCount();
@@ -106,6 +123,8 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
         ResultController.instance.SetTimeLimitScoreText(timeScore);
         ResultController.instance.SetRotateScoreText(rotateScore);
         ResultController.instance.SetTotalScoreText(totalScore);
+
+        PlayerStatus.AddPlayTime(Time.time - startTime);
     }
 
     private float TimeLag()
@@ -115,7 +134,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 
     public float TargetDistance()
     {
-       return Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f;
+        return Vector2.Distance(toiletObject.transform.position, targetObject.transform.position) * 10.0f;
     }
 
     public void SetIsPlay(bool isPlay)
@@ -125,7 +144,7 @@ public class MainScriptManager : SingletonMonoBehaviourFast<MainScriptManager>
 
     public void SelectToilet(int type)
     {
-//        toiletData = achievementManager.GetResearchData((ToiletType)type);
+        //        toiletData = achievementManager.GetResearchData((ToiletType)type);
         playerController.enabled = true;
         playerController.SetIsInput(true);
         toiletObject = Instantiate(toiletData.Prefab, playerControllerObject.transform.position, Quaternion.identity);
