@@ -18,6 +18,8 @@ public class OptionUIManager : SingletonMonoBehaviourFast<OptionUIManager>
     [SerializeField] private GameObject achievementDisplayFrame;//prefab
     [SerializeField] private GameObject parentAchievementDisplayFrame;//アチーブメント表示の親
     [SerializeField] private AchievementManager achievementManager;
+    [SerializeField] private GameObject achievementDisplay;
+    private RectTransform rectAchievementDisplay;
 
     public void SetPlaytime(string text)
     {
@@ -70,6 +72,12 @@ public class OptionUIManager : SingletonMonoBehaviourFast<OptionUIManager>
 
     private GameObject[] achievementDisplayFrames;
 
+    private void Start()
+    {
+        rectAchievementDisplay = achievementDisplay.GetComponent<RectTransform>();
+        CreateViewAchievementList();
+    }
+
     public void OptionOpen()
     {
         this.transform.GetChild(0).gameObject.SetActive(true);
@@ -80,6 +88,7 @@ public class OptionUIManager : SingletonMonoBehaviourFast<OptionUIManager>
         SetPerfectCount(PlayerStatus.GetPerfectsCount());
         ContinuousCount(0);
         CreateViewAchievementList();
+        rectAchievementDisplay = achievementDisplay.GetComponent<RectTransform>();
     }
 
     public void OptionClose()
@@ -93,10 +102,13 @@ public class OptionUIManager : SingletonMonoBehaviourFast<OptionUIManager>
         AchievementData[] achievementDatas = achievementManager.GetAchievementDatas();
         bool[] achievements = achievementManager.GetAchievements();
 
+        var y = (rectAchievementDisplay.rect.height-15)/6;//パネルサイズ取得
+
         achievementDisplayFrames = new GameObject[achievementDatas.Length];
         for (int i = 0; i < achievementDatas.Length; i++)
         {
             GameObject frameObject = Instantiate(achievementDisplayFrame) as GameObject;
+            frameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(frameObject.GetComponent<RectTransform>().sizeDelta.x, y);
             Debug.Log(frameObject);
             achievementDisplayFrames[i] = frameObject;
 
